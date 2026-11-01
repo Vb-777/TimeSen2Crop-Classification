@@ -1,0 +1,17 @@
+# data and generated artefacts (TimeSen2Crop is ~1 M files – never commit it)
+data/
+cache/
+*.npz
+*.pt
+
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+.ipynb_checkpoints/
+.venv/
+venv/
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/

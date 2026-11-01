@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "cropclf"
+version = "2.0.0"
+description = "Crop-type classification (TempCNN, Transformer, weighted LSTM) and NDVI monitoring on TimeSen2Crop Sentinel-2 time series"
+readme = "README.md"
+requires-python = ">=3.9"
+authors = [{ name = "Vaibhav Barsaiyan" }, { name = "Sravan S Sankar" }, { name = "Shubham Thawait" }]
+license = { text = "MIT" }
+dependencies = ["numpy>=1.22", "scikit-learn>=1.1", "matplotlib>=3.5", "torch>=1.13"]
+
+[project.optional-dependencies]
+dev = ["pytest>=7"]
+
+[project.scripts]
+cropclf = "cropclf.cli:main"
+
+[tool.setuptools]
+packages = ["cropclf"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

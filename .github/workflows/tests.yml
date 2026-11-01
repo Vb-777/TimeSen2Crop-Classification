@@ -1,0 +1,24 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install (CPU-only PyTorch keeps CI fast)
+        run: |
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -e ".[dev]"
+      - run: pytest -q
+      - name: End-to-end smoke test on synthetic data
+        run: |
+          python -m cropclf synth --out /tmp/synth --pixels-per-class 15
+          python -m cropclf prepare --root /tmp/synth --cache /tmp/cache --workers 2
+          python -m cropclf benchmark --cache /tmp/cache --out /tmp/results --epochs 3 --quiet
